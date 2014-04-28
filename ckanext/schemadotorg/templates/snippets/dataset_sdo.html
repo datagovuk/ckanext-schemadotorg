@@ -1,0 +1,25 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Dataset",
+  "@id": "{% url_for 'dataset_read', id=package.name, qualified=True %}"
+  "name": "{{ package.title|safe }}",
+  "about": "{{ package.notes|safe }}",
+  "catalog": {
+     "@type": "DataCatalog",
+     "@id": "{% url_for 'search',qualified=True %}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "{% url_for 'organization_read', id=package.organization.name, qualified=True %}"
+  },
+  "distribution": [ {% for resource in package.resources %}
+    {
+        "@type": "DataDownload",
+        "@id": "{% url_for controller='package',action='resource_read', id=package.name,resource_id=resource.id, qualified=True %}",
+        "contentURL": "{{ resource.url }}",
+        "encodingFormat": "{{ resource.format }}",
+    }{% if not loop.last %},{% endif %}{% endfor %}
+  ]
+}
+</script>

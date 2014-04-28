@@ -1,7 +1,5 @@
 
 
-
-
 def get_suborganizations(organization):
     import ckan.model as model
     org = model.Group.get(organization['id'])
