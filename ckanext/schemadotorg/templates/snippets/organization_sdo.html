@@ -1,0 +1,23 @@
+{% set sub=h.get_suborganizations(organization) %}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "@id": "{% url_for 'organization_read',id=organization.name,qualified=True %}"
+  "name": "{{ organization.title }}",
+  "description": "{{ organization.description }}",
+  {% if organization.image_url %}
+  "image": "{{ organization.image_url }}",
+  {% endif %}
+  {% if sub %}
+  "subOrganization": [
+    {% for org in sub %}
+    {
+      "@type": "Organization",
+      "@id": ""
+    },
+    {% endfor %}
+  ]
+  {% endif %}
+}
+</script>
