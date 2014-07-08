@@ -2,7 +2,7 @@
 {
   "@context": "http://schema.org",
   "@type": "Dataset",
-  "@id": "{% url_for 'dataset_read', id=package.name, qualified=True %}"
+  "@id": "{% url_for 'dataset_read', id=package.name, qualified=True %}",
   "name": "{{ package.title|safe }}",
   "about": "{{ package.notes|safe }}",
   "catalog": {
@@ -18,7 +18,7 @@
         "@type": "DataDownload",
         "@id": "{% url_for controller='package',action='resource_read', id=package.name,resource_id=resource.id, qualified=True %}",
         "contentURL": "{{ resource.url }}",
-        "encodingFormat": "{{ resource.format }}",
+        "encodingFormat": "{{ resource.format }}"
     }{% if not loop.last %},{% endif %}{% endfor %}
   ]
 }

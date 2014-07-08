@@ -3,7 +3,7 @@
 {
   "@context": "http://schema.org",
   "@type": "Organization",
-  "@id": "{% url_for 'organization_read',id=organization.name,qualified=True %}"
+  "@id": "{% url_for 'organization_read',id=organization.name,qualified=True %}",
   "name": "{{ organization.title }}",
   "description": "{{ organization.description }}",
   {% if organization.image_url %}
@@ -15,8 +15,8 @@
     {
       "@type": "Organization",
       "@id": ""
-    },
-    {% endfor %}
+    }
+    {% if not loop.last %},{% endif %}{% endfor %}
   ]
   {% endif %}
 }
